@@ -1,5 +1,4 @@
-[[redirects]]
-  from = "/.netlify/identity/confirm"
+from = "/.netlify/identity/confirm"
   to = "/admin/"
   status = 200
   force = true
