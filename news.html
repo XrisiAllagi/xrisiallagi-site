@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Ειδήσεις</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <nav>
+  <div class="nav-container">
+    <a href="index.html">
+      <img src="logo.png" alt="Logo" class="nav-logo">
+    </a>
+    <div class="nav-links">
+      <a href="index.html">ΑΡΧΙΚΗ</a>
+      <a href="tips.html">ΣΤΟΙΧΗΜΑΤΙΚΑ TIPS</a>
+      <a href="news.html">ΕΙΔΗΣΕΙΣ</a>
+      <a href="contact.html">ΕΠΙΚΟΙΝΩΝΙΑ</a>
+    </div>
+  </div>
+</nav>
+
+
+<div class="container">
+  <h1>Όλα τα Άρθρα</h1>
+  <div id="blog-feed"></div>
+</div>
+
+<footer>
+  <p>© 2025 Χρυσή Αλλαγή • All rights reserved</p>
+  <div class="social-icons">
+    <a href="https://www.instagram.com/xrisiallagi.gr/" target="_blank" rel="noopener noreferrer">
+      <img src="instagram.png" alt="Instagram">
+    </a>
+  </div>
+</footer>
+
+<script>
+fetch('posts.json')
+  .then(response => response.json())
+  .then(posts => {
+    const feed = document.getElementById('blog-feed');
+    posts.forEach(post => {
+      feed.innerHTML += `
+        <div class="blog-card">
+          <div class="blog-card-text">
+            <p class="category">${post.category} <span class="blog-date">${post.date}</span></p>
+            <h2><a href="${post.link}">${post.title}</a></h2>
+            <p>${post.summary}</p>
+          </div>
+          <div class="blog-card-img">
+            <img src="${post.image}" alt="${post.title}">
+          </div>
+        </div>
+      `;
+    });
+  })
+  .catch(err => {
+    console.error("Σφάλμα φόρτωσης άρθρων:", err);
+  });
+</script>
+
+</body>
+</html>

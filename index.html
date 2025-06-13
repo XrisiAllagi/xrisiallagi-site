@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Χρυσή Αλλαγή</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+ <div class="page-wrapper">
+
+  <nav>
+  <div class="nav-container">
+    <a href="index.html">
+      <img src="logo.png" alt="Logo" class="nav-logo">
+    </a>
+    <div class="nav-links">
+      <a href="index.html">ΑΡΧΙΚΗ</a>
+      <a href="tips.html">ΣΤΟΙΧΗΜΑΤΙΚΑ TIPS</a>
+      <a href="news.html">ΕΙΔΗΣΕΙΣ</a>
+      <a href="contact.html">ΕΠΙΚΟΙΝΩΝΙΑ</a>
+    </div>
+  </div>
+</nav>
+
+
+<div class="container">
+  <div class="branding">
+    <img src="FullLogo.png" alt="Χρυσή Αλλαγή Logo" class="home-logo">
+    <p class="slogan">Όταν μπαίνουμε στο γήπεδο, η ανατροπή είναι δεδομένη.</p>
+  </div>
+
+    <h2>ΤΕΛΕΥΤΑΙΑ ΆΡΘΡΑ</h2>
+    <div id="featured-post"></div>
+    <div id="recent-posts" class="recent-posts-grid"></div>
+
+</div>
+
+<footer>
+  <p>© 2025 Χρυσή Αλλαγή • All rights reserved</p>
+  <div class="social-icons">
+    <a href="https://www.instagram.com/xrisiallagi.gr/" target="_blank" rel="noopener noreferrer">
+      <img src="instagram.png" alt="Instagram">
+    </a>
+  </div>
+</footer>
+
+<script>
+fetch('posts.json')
+  .then(res => res.json())
+  .then(posts => {
+    const featured = posts[0]; // latest
+    const others = posts.slice(1, 4); // next 3
+
+    const featuredDiv = document.getElementById('featured-post');
+    const recentDiv = document.getElementById('recent-posts');
+
+    // Big featured card
+    featuredDiv.innerHTML = `
+      <div class="featured-card">
+        <img src="${featured.image}" alt="${featured.title}">
+        <div class="featured-text">
+          <p class="category">${featured.category} <span class="blog-date">${featured.date}</span></p>
+          <h2><a href="${featured.link}">${featured.title}</a></h2>
+          <p>${featured.summary}</p>
+          <a href="${featured.link}" class="read-more">Διαβάστε περισσότερα →</a>
+        </div>
+      </div>
+    `;
+
+    // Smaller recent posts
+    others.forEach(post => {
+      recentDiv.innerHTML += `
+        <div class="blog-card">
+  <div class="blog-card-text">
+    <p class="category">${post.category} <span class="blog-date">${post.date}</span></p>
+    <h3><a href="${post.link}">${post.title}</a></h3>
+    <p>${post.summary}</p>
+    <a href="${post.link}" class="read-more">Διαβάστε περισσότερα →</a>
+  </div>
+  <div class="blog-card-img">
+    <img src="${post.image}" alt="${post.title}">
+  </div>
+</div>
+      `;
+    });
+  });
+</script>
+
+</body>
+</html>
