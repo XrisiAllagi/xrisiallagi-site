@@ -1,24 +1,20 @@
-<!doctype html>
-<html>
+<!DOCTYPE html>
+<html lang="en">
   <head>
-    <meta charset="utf-8" />
+    <meta charset="UTF-8" />
     <title>Content Manager</title>
+    <script>
+      const urlParams = new URLSearchParams(window.location.hash.substring(1));
+      const inviteToken = urlParams.get("invite_token");
+
+      if (inviteToken) {
+        localStorage.setItem("netlify-invite-token", inviteToken);
+        window.location.replace("/admin/");
+      }
+    </script>
   </head>
   <body>
-    <script src="https://unpkg.com/netlify-cms@^2.0.0/dist/netlify-cms.js"></script>
-
-    <script>
-  const urlParams = new URLSearchParams(window.location.hash.substring(1));
-  const inviteToken = urlParams.get("invite_token");
-
-  if (inviteToken) {
-    // Store the token so Netlify Identity can use it
-    localStorage.setItem("netlify-invite-token", inviteToken);
-
-    // Redirect cleanly to /admin/
-    window.location.href = "/admin/";
-  }
-</script>
-
+    <!-- Mount point for Netlify CMS -->
+    <script src="https://unpkg.com/netlify-cms@^2.10.0/dist/netlify-cms.js"></script>
   </body>
 </html>
