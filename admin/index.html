@@ -12,9 +12,10 @@
   const inviteToken = urlParams.get("invite_token");
 
   if (inviteToken) {
-    // Store the invite token so Netlify Identity can use it
+    // Store the token so Netlify Identity can use it
     localStorage.setItem("netlify-invite-token", inviteToken);
-    // Reload the page without the token in URL
+
+    // Redirect cleanly to /admin/
     window.location.href = "/admin/";
   }
 </script>
