@@ -7,17 +7,7 @@
 </head>
 
 <body>
-
-  <script>
-    const urlParams = new URLSearchParams(window.location.hash.substring(1));
-    const inviteToken = urlParams.get("invite_token");
-
-    if (inviteToken) {
-      localStorage.setItem("netlify-invite-token", inviteToken);
-      window.location.href = "/admin/";
-    }
-  </script>
-
+  
  <div class="page-wrapper">
 
   <nav>
